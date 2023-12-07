@@ -16,7 +16,10 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.myAppUrl + this.myApiUrl);
   }
-  postProduct(product: FormData) {
+  saveProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.myAppUrl + this.myApicrear, product);
+  }
+  deleteProduct(id: Number) {
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
 }

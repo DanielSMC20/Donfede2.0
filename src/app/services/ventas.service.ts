@@ -11,6 +11,8 @@ import { Venta } from '../model/Venta';
 export class VentasService {
   myAppUrl = environment.backventa;
   myApiUrl = '/list';
+  myApicrear = '/create';
+
   constructor(private http: HttpClient) {}
 
   getVentas(): Observable<Venta[]> {
@@ -24,5 +26,11 @@ export class VentasService {
         });
       })
     );
+  }
+  saveVenta(venta: Venta): Observable<Venta> {
+    return this.http.post<Venta>(this.myAppUrl + this.myApicrear, venta);
+  }
+  deleteVenta(id: Number) {
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
 }

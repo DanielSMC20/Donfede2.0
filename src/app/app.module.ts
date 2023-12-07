@@ -24,6 +24,7 @@ import { TipoproductosComponent } from './pages/tipoproductos/tipoproductos.comp
 import { TipouvaComponent } from './pages/tipouva/tipouva.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MateriaprimaComponent } from './pages/materiaprima/materiaprima.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginComponent } from './pages/login/login.component';
     TipouvaComponent,
     ProductosComponent,
     LoginComponent,
+    MateriaprimaComponent,
   ],
   imports: [
     BrowserModule,

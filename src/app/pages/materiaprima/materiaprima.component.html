@@ -1,0 +1,173 @@
+<div class="card">
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="Nuevo"
+        icon="pi pi-plus"
+        class="p-button-success mr-2"
+        (click)="openNew()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="materiapris"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['descripcion']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h1 class="m-0">Gestión de Materia Prima</h1>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($event.target, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th pSortableColumn="descripcion" style="min-width: 10rem">
+          Nombre <p-sortIcon field="descripcion"></p-sortIcon>
+        </th>
+        <th pSortableColumn="descripcion" style="min-width: 10rem">
+          Descripcion <p-sortIcon field="descripcion"></p-sortIcon>
+        </th>
+        <th pSortableColumn="descripcion" style="min-width: 10rem">
+          Cantidad <p-sortIcon field="descripcion"></p-sortIcon>
+        </th>
+        <th pSortableColumn="precio">
+          Tipo de Materia <p-sortIcon field="precio"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-materiapri>
+      <tr>
+        <td>{{ materiapri.id }}</td>
+        <td>{{ materiapri.nombre }}</td>
+        <td>{{ materiapri.description }}</td>
+        <td>{{ materiapri.cantidad | currency : "KG " }}</td>
+        <td>{{ materiapri.tipo }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editProduct(materiapri)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteProduct(materiapri.id)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{ materiapris ? materiapris.length : 0 }} usuarios.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  [(visible)]="productDialog"
+  [style]="{ width: '450px' }"
+  header="Detalle de Materia Prima"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="nombre">Nombre de Materia Prima</label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="materiapri.nombre"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !materiapri.nombre"
+        >Nombre es requerido.</small
+      >
+    </div>
+    <div class="field">
+      <label for="descripcion">Descripcion</label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="materiapri.description"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !materiapri.description"
+        >Descripcion es requerido.</small
+      >
+      <div class="field col">
+        <label for="tipo">Tipo</label>
+        <input
+          type="text"
+          pInputText
+          id="name"
+          [(ngModel)]="materiapri.tipo"
+          required
+          autofocus
+        />
+        <small class="p-error" *ngIf="submitted && !materiapri.tipo"
+          >Tipo es requerido.</small
+        >
+      </div>
+      <div class="field col">
+        <label for="tipo">Cantidad</label>
+        <p-inputNumber
+          id="cantidad"
+          [(ngModel)]="materiapri.cantidad"
+          suffix="KG"
+        ></p-inputNumber>
+        <small class="p-error" *ngIf="submitted && !materiapri.tipo"
+          >La cantidad es requerida.</small
+        >
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Save"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveProduct()"
+    ></button>
+  </ng-template>
+</p-dialog>

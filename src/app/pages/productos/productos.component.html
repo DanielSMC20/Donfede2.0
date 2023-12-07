@@ -2,7 +2,6 @@
   <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left">
           <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-          <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct()"></button>
       </ng-template>      
   </p-toolbar>
   <p-table #dt [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['descripcion']" [tableStyle]="{'min-width': '75rem'}"
@@ -21,8 +20,10 @@
           <tr>           
               <th>Id</th>  
               <th pSortableColumn="descripcion" style="min-width:10rem">Descripcion <p-sortIcon field="descripcion"></p-sortIcon></th>
-              <th pSortableColumn="descripcion" style="min-width:10rem">Stock <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="descripcion" style="min-width:10rem">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+              <th pSortableColumn="tipouva" style="min-width:10rem">Presentacion <p-sortIcon field="tipouva"></p-sortIcon></th>
               <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+              
               <th></th>
           </tr>
       </ng-template>
@@ -31,10 +32,11 @@
               <td>{{product.id}}</td>  
               <td>{{product.descripcion}}</td>
               <td>{{product.stock}}</td>
+              <td>{{product.presentacion}}</td>
               <td>{{product.precio | currency:'S/'}}</td>                          
               <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct()"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct()"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product.id)"></button>
               </td>
           </tr>
       </ng-template>
@@ -47,18 +49,41 @@
 </div>
 <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalle de Productos" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
+          <div class="field">
+    <label for="descripcion">Nombre</label>
+          <input type="text" pInputText id="name" [(ngModel)]="product.nombre" required autofocus />
+          <small class="p-error" *ngIf="submitted && !product.nombre">Nombre es requerido.</small>
+      </div>
       <div class="field">
           <label for="descripcion">Descripcion</label>
           <input type="text" pInputText id="name" [(ngModel)]="product.descripcion" required autofocus />
           <small class="p-error" *ngIf="submitted && !product.descripcion">Descripcion es requerido.</small>
       </div>
       <div class="field">
-          <label for="precio">Precio</label>
-          <div class="field col">
+            <label for="gradoalcohol">Grado de Alcohol</label>
+            <p-inputNumber id="gradoalcohol" [(ngModel)]="product.gradoalcohol" prefix="%"></p-inputNumber>
+            <small class="p-error" *ngIf="submitted && !product.gradoalcohol">Grado de Alcohol es requerido.</small>
+        </div>
+              <div class="field">
+            <label for="idcategoria">Categoria ID</label>
+            <p-inputNumber id="idcategoria" [(ngModel)]="product.idcategoria"></p-inputNumber>
+            <small class="p-error" *ngIf="submitted && !product.idcategoria">Categoria es requerida.</small>
+        </div>
+        <div class="field">
+            <label for="tipouva">Tipo Uva ID</label>
+            <p-inputNumber id="tipouva" [(ngModel)]="product.tipouva"></p-inputNumber>
+             <small class="p-error" *ngIf="submitted && !product.tipouva">Tipo de Uva es requerido.</small>
+        </div>
+              <div class="field">
+        <div class="field">
+            <label for="tipouva">Stock</label>
+            <p-inputNumber id="tipouva" [(ngModel)]="product.tipouva"></p-inputNumber>
+            
+        </div>
             <label for="precio">Precio</label>
             <p-inputNumber id="precio" [(ngModel)]="product.precio" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
         </div>
-      </div>
+
   </ng-template>
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
