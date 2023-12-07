@@ -9,6 +9,7 @@ export const environment = {
   backtipopro: 'http://localhost:8080/api/v1/tipoproduct',
   backtipou: 'http://localhost:8080/apitipouva',
   backventa: 'http://localhost:8080/apiventa',
+  backmateria: 'http://localhost:8080/api/v1/materiaprima',
 };
 
 /*

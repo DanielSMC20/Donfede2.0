@@ -1,5 +1,5 @@
+import { Product } from './../../model/Product';
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/model/Product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -32,10 +32,16 @@ export class ProductosComponent implements OnInit {
     this.productDialog = true;
   }
 
-  deleteProduct() {}
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id).subscribe((data) => {
+      console.log(data);
+    });
+    this.products = this.products.filter((val) => val.id !== id);
+    this.product = {};
+  }
 
-  editProduct() {
-    //this.product = {...product};
+  editProduct(product: Product) {
+    this.product = { ...product };
     this.productDialog = true;
   }
 
@@ -43,8 +49,29 @@ export class ProductosComponent implements OnInit {
     this.productDialog = false;
     this.submitted = false;
   }
+  loadActulizar() {
+    this.products.push(this.product);
+    this.products = [...this.products];
+    this.productDialog = false;
+    this.product = {};
+  }
 
   saveProduct() {
+    this.submitted = true;
+    this.productService.saveProduct(this.product).subscribe((data) => {
+      this.product = data;
+      this.loadActulizar();
+    });
+  }
 
+  findIndexById(id: Number): number {
+    let index = -1;
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    return index;
   }
 }

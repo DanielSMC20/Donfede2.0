@@ -5,6 +5,7 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { TipoproductosComponent } from './pages/tipoproductos/tipoproductos.component';
 import { TipouvaComponent } from './pages/tipouva/tipouva.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
+import { MateriaprimaComponent } from './pages/materiaprima/materiaprima.component';
 
 const routes: Routes = [
   { path: 'productos', component: ProductosComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'tipouva', component: TipouvaComponent },
   { path: '', redirectTo: 'productos', pathMatch: 'full' },
   { path: 'ventas', component: VentasComponent },
+  { path: 'materiaprima', component: MateriaprimaComponent },
 ];
 
 @NgModule({

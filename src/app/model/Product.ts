@@ -3,9 +3,12 @@ export class Product {
     descripcion?: String;
     precio?: Number;
     stock?:Number;
+    gradoalcohol?:Number;
     idcategoria?:Number;
     fechacreacion?:Date;
     presentacion?:String;
+    tipouva?:Number;
+    nombre?:String;
 }
 
 
