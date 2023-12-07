@@ -2,7 +2,7 @@
   <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left">
           <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-          <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct()"></button>
+
       </ng-template>      
   </p-toolbar>
   <p-table #dt [value]="tipouvas" [rows]="10" [paginator]="true" [globalFilterFields]="['descripcion']" [tableStyle]="{'min-width': '75rem'}"
@@ -24,6 +24,7 @@
               <th pSortableColumn="descripcion" style="min-width:10rem">Nombre <p-sortIcon field="descripcion"></p-sortIcon></th>
               <th pSortableColumn="descripcion" style="min-width:10rem">Descripcion <p-sortIcon field="descripcion"></p-sortIcon></th>
               <th pSortableColumn="descripcion" style="min-width:10rem">Tipo <p-sortIcon field="descripcion"></p-sortIcon></th>
+
               
               <th></th>
           </tr>
@@ -34,10 +35,10 @@
               <td>{{tipou.nombre}}</td>
               <td>{{tipou.description}}</td>
               <td>{{tipou.almacen}}</td>
-              <td>{{tipou.tipo | currency:'S/'}}</td>                          
+              
               <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct()"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct()"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(tipou)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(tipou.id)"></button>
               </td>
           </tr>
       </ng-template>
@@ -50,18 +51,25 @@
 </div>
 <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalle de Productos" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
+               <div class="field">
+          <label for="descripcion">Nombre</label>
+          <input type="text" pInputText id="name" [(ngModel)]="tipouva.nombre" required autofocus />
+          <small class="p-error" *ngIf="submitted && !tipouva.nombre">Nombre es requerido.</small>
+      </div>
       <div class="field">
           <label for="descripcion">Descripcion</label>
           <input type="text" pInputText id="name" [(ngModel)]="tipouva.description" required autofocus />
-          <small class="p-error" *ngIf="submitted && !tipouva.materia">Descripcion es requerido.</small>
+          <small class="p-error" *ngIf="submitted && !tipouva.description">Descripcion es requerido.</small>
+      </div>
+           <div class="field">
+          <label for="descripcion">Almacen</label>
+          <input type="text" pInputText id="name" [(ngModel)]="tipouva.almacen" required autofocus />
+          <small class="p-error" *ngIf="submitted && !tipouva.almacen">Almacen es requerido.</small>
       </div>
       <div class="field">
-          <label for="precio">Precio</label>
-          <div class="field col">
-            <label for="precio">Precio</label>
-            <p-inputNumber id="precio" [(ngModel)]="tipouva.id" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            <label for="materia">Materia ID</label>
+            <p-inputNumber id="materia" [(ngModel)]="tipouva.idmprima_id" ></p-inputNumber>
         </div>
-      </div>
   </ng-template>
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>

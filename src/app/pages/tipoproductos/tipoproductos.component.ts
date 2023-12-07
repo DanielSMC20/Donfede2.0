@@ -30,10 +30,15 @@ export class TipoproductosComponent implements OnInit {
     this.productDialog = true;
   }
 
-  deleteProduct() {}
-
-  editProduct() {
-    //this.product = {...product};
+  deleteProduct(id: number) {
+    this.tipoproductoService.deletetipo(id).subscribe((data) => {
+      console.log(data);
+    });
+    this.tipopros = this.tipopros.filter((val) => val.id !== id);
+    this.tipopro = {};
+  }
+  editProduct(tipopro: Tipopro) {
+    this.tipopro = { ...tipopro };
     this.productDialog = true;
   }
 
@@ -42,5 +47,17 @@ export class TipoproductosComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct() {}
+  saveTipopro() {
+    this.submitted = true;
+    this.tipoproductoService.saveTipopro(this.tipopro).subscribe((data) => {
+      this.tipopro = data;
+      this.loadActulizar();
+    });
+  }
+  loadActulizar() {
+    this.tipopros.push(this.tipopro);
+    this.tipopros = [...this.tipopros];
+    this.productDialog = false;
+    this.tipopro = {};
+  }
 }

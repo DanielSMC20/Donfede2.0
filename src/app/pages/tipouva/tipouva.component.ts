@@ -30,10 +30,15 @@ export class TipouvaComponent implements OnInit {
     this.productDialog = true;
   }
 
-  deleteProduct() {}
-
-  editProduct() {
-    //this.product = {...product};
+  deleteProduct(id: number) {
+    this.tipouvaService.deletetipouva(id).subscribe((data) => {
+      console.log(data);
+    });
+    this.tipouvas = this.tipouvas.filter((val) => val.id !== id);
+    this.tipouva = {};
+  }
+  editProduct(tipou: Tipouva) {
+    this.tipouva = { ...tipou };
     this.productDialog = true;
   }
 
