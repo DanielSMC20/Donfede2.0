@@ -1,7 +1,7 @@
 export class Tipouva {
   id?: Number;
   nombre?: String;
-  materia?: Number;
+  idmprima_id?: Number;
   almacen?: String;
   description?: String;
 }

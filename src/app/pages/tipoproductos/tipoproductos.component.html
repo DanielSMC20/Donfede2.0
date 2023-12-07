@@ -2,7 +2,7 @@
   <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left">
           <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-          <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct()"></button>
+          
       </ng-template>      
   </p-toolbar>
   <p-table #dt [value]="tipopros" [rows]="10" [paginator]="true" [globalFilterFields]="['descripcion']" [tableStyle]="{'min-width': '75rem'}"
@@ -30,11 +30,10 @@
           <tr>
               <td>{{tipop.id}}</td>  
               <td>{{tipop.description}}</td>
-              <td>{{tipop.tipo}}</td>
-              <td>{{tipop.tipo | currency:'S/'}}</td>                          
+              <td>{{tipop.tipo}}</td>                          
               <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct()"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct()"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(tipop)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(tipop.id)"></button>
               </td>
           </tr>
       </ng-template>
@@ -45,23 +44,22 @@
       </ng-template>
   </p-table>
 </div>
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalle de Productos" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header=" Tipo de Productos" [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
       <div class="field">
           <label for="descripcion">Descripcion</label>
           <input type="text" pInputText id="name" [(ngModel)]="tipopro.decription" required autofocus />
-          <small class="p-error" *ngIf="submitted && !tipopro.tipo">Descripcion es requerido.</small>
+          <small class="p-error" *ngIf="submitted && !tipopro.decription">Descripcion es requerido.</small>
       </div>
       <div class="field">
-          <label for="precio">Precio</label>
-          <div class="field col">
-            <label for="precio">Precio</label>
-            <p-inputNumber id="precio" [(ngModel)]="tipopro.id" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            <label for="precio">Tipo</label>
+            <input type="text" pInputText id="name" [(ngModel)]="tipopro.tipo" required autofocus />
+          <small class="p-error" *ngIf="submitted && !tipopro.tipo">Tipo es requerido.</small>
         </div>
-      </div>
+
   </ng-template>
   <ng-template pTemplate="footer">
       <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTipopro()"></button>
   </ng-template>
 </p-dialog>

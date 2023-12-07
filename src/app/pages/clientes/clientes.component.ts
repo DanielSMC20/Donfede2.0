@@ -32,10 +32,15 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-  deleteProduct() {}
-
-  editProduct() {
-    //this.product = {...product};
+  deleteProduct(id: number) {
+    this.usuarioService.deletetipouva(id).subscribe((data) => {
+      console.log(data);
+    });
+    this.usuarios = this.usuarios.filter((val) => val.id !== id);
+    this.usuario = {};
+  }
+  editProduct(usuario: Usuarios) {
+    this.usuario = { ...usuario };
     this.productDialog = true;
   }
 
