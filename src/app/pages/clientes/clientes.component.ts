@@ -16,9 +16,7 @@ export class ClientesComponent implements OnInit {
   //products: Product[];
   usuario: Usuarios = new Usuarios();
   submitted: boolean = false;
-  constructor(
-    private usuarioService: UsuariosService,
-  ) {}
+  constructor(private usuarioService: UsuariosService) {}
 
   ngOnInit() {
     this.LoadProducts();
@@ -46,5 +44,17 @@ export class ClientesComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct() {}
+  saveProduct() {
+    this.submitted = true;
+    this.usuarioService.saveTipouva(this.usuario).subscribe((data) => {
+      this.usuario = data;
+      this.loadActulizar();
+    });
+  }
+  loadActulizar() {
+    this.usuarios.push(this.usuario);
+    this.usuarios = [...this.usuarios];
+    this.productDialog = false;
+    this.usuario = {};
+  }
 }

@@ -21,9 +21,9 @@
           <tr>           
               <th>Id</th>  
 
-              <th pSortableColumn="descripcion" style="min-width:10rem">Nombre <p-sortIcon field="descripcion"></p-sortIcon></th>
-              <th pSortableColumn="descripcion" style="min-width:10rem">Descripcion <p-sortIcon field="descripcion"></p-sortIcon></th>
-              <th pSortableColumn="descripcion" style="min-width:10rem">Tipo <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="descripcion" style="min-width:10rem">Tipo de Pago <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="descripcion" style="min-width:10rem">Vendedor ID <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="descripcion" style="min-width:10rem">Tipo Entrega<p-sortIcon field="descripcion"></p-sortIcon></th>
               
               <th></th>
           </tr>
@@ -33,8 +33,8 @@
               <td>{{venta.id}}</td>  
               <td>{{venta.tipodepago}}</td>
               <td>{{venta.tipoentrega}}</td>
-              <td>{{formatearFecha(venta.fechacreacion)}}</td>
-              <td>{{venta.tipo | currency:'S/'}}</td>                          
+              <td>{{venta.iduser}}</td>
+                                 
               <td>
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct()"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct()"></button>
@@ -53,7 +53,7 @@
       <div class="field">
           <label for="descripcion">Descripcion</label>
           <input type="text" pInputText id="name" [(ngModel)]="venta.fechacreacion" required autofocus />
-          <small class="p-error" *ngIf="submitted && !venta.almacen">Descripcion es requerido.</small>
+          <small class="p-error" *ngIf="submitted && !venta.tipoentrega">Descripcion es requerido.</small>
       </div>
       <div class="field">
           <label for="precio">Precio</label>

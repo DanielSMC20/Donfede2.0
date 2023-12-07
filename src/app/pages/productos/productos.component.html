@@ -59,6 +59,11 @@
           <input type="text" pInputText id="name" [(ngModel)]="product.descripcion" required autofocus />
           <small class="p-error" *ngIf="submitted && !product.descripcion">Descripcion es requerido.</small>
       </div>
+            <div class="field">
+          <label for="descripcion">Presentacion</label>
+          <input type="text" pInputText id="name" [(ngModel)]="product.presentacion" required autofocus />
+          <small class="p-error" *ngIf="submitted && !product.presentacion">Presentacion es requerido.</small>
+      </div>
       <div class="field">
             <label for="gradoalcohol">Grado de Alcohol</label>
             <p-inputNumber id="gradoalcohol" [(ngModel)]="product.gradoalcohol" prefix="%"></p-inputNumber>
@@ -77,7 +82,7 @@
               <div class="field">
         <div class="field">
             <label for="tipouva">Stock</label>
-            <p-inputNumber id="tipouva" [(ngModel)]="product.tipouva"></p-inputNumber>
+            <p-inputNumber id="tipouva" [(ngModel)]="product.stock"></p-inputNumber>
             
         </div>
             <label for="precio">Precio</label>
