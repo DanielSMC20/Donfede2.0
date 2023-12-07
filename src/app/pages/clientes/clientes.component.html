@@ -1,0 +1,76 @@
+<div class="card">
+  <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+          <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct()"></button>
+      </ng-template>      
+  </p-toolbar>
+
+  <p-table #dt [value]="usuarios" [rows]="10" [paginator]="true" [globalFilterFields]="['descripcion']" [tableStyle]="{'min-width': '75rem'}"
+      [rowHover]="true" dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+      <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+              <h1 class="m-0">Gestión de Usuarios</h1>
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Search..." />
+              </span>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>           
+              <th>Id</th>  
+              <th pSortableColumn="descripcion" style="min-width:10rem">Correo <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="descripcion" style="min-width:10rem">Username <p-sortIcon field="descripcion"></p-sortIcon></th>
+              <th pSortableColumn="precio">Password <p-sortIcon field="precio"></p-sortIcon></th>
+              <th></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-usuario>
+          <tr>
+              <td>{{usuario.id}}</td>  
+              <td>{{usuario.email}}</td>
+              <td>{{usuario.username}}</td>
+              <td>{{usuario.password }}</td>                          
+              <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct()"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct()"></button>
+              </td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+              In total there are {{usuarios ? usuarios.length : 0 }} usuarios.
+          </div>
+      </ng-template>
+  </p-table>
+</div>
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalle de Productos" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+      
+      <div class="field">
+          <label for="username">nombre de usuario</label>
+          <input type="text" pInputText id="name" [(ngModel)]="usuario.username" required autofocus />
+          <small class="p-error" *ngIf="submitted && !usuario.username">Descripcion es requerido.</small>
+      </div>
+      <div class="field">
+          <label for="precio">Email</label>
+          <input type="text" pInputText id="name" [(ngModel)]="usuario.email" required autofocus />
+          <small class="p-error" *ngIf="submitted && !usuario.username">Descripcion es requerido.</small>
+          <div class="field col">
+            <label for="password">Password</label>
+            <input type="password" pInputText id="name" [(ngModel)]="usuario.password" required autofocus />
+            <small class="p-error" *ngIf="submitted && !usuario.password">Contraseña es requerido.</small>
+
+        </div>
+      </div>
+     
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)=" editProduct()"></button>
+  </ng-template>
+</p-dialog>

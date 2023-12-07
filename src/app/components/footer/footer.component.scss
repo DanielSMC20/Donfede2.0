@@ -1,0 +1,27 @@
+// footer.component.scss
+footer {
+  background-color: #333;  // Color de fondo del footer
+  color: white;  // Color de texto en el footer
+  padding: 20px;
+  text-align: center;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      max-width: 50px;  // Ajusta el tamaño máximo del logotipo
+      margin-right: 10px;
+    }
+
+    .brand-name {
+      font-size: 1.2em;  // Ajusta el tamaño del texto de la marca
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 0.9em;  // Ajusta el tamaño del texto del pie de página
+  }
+}
