@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeIcons } from 'primeng/api';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Usuarios } from 'src/app/model/Clientes';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -18,8 +18,6 @@ export class ClientesComponent implements OnInit {
   submitted: boolean = false;
   constructor(
     private usuarioService: UsuariosService,
-    private _snackBar: MatSnackBar,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -48,17 +46,5 @@ export class ClientesComponent implements OnInit {
     this.submitted = false;
   }
 
-  agregarUsuario(usuario: Usuarios) {
-    this.usuarioService.añadirUsuario(usuario).subscribe((data) => {
-      this.mensajeDeExito('registrado');
-      this.router.navigate(['/clientes']);
-    });
-  }
-  mensajeDeExito(texto: string) {
-    this._snackBar.open(`El usuario fue ${texto} con exito`, '', {
-      duration: 4500,
-      horizontalPosition: 'right',
-      verticalPosition: 'bottom',
-    });
-  }
+  saveProduct() {}
 }
