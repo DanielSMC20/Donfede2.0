@@ -1,7 +1,7 @@
 export class Product {
     id?: Number;
     descripcion?: String;
-    precio?: Number;
+    precio?: number;
     stock?:Number;
     gradoalcohol?:Number;
     idcategoria?:Number;
@@ -9,6 +9,7 @@ export class Product {
     presentacion?:String;
     tipouva?:Number;
     nombre?:String;
+    cantidad?:Number;
 }
 
 

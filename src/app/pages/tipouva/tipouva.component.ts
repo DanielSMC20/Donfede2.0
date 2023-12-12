@@ -47,5 +47,17 @@ export class TipouvaComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct() {}
+  saveProduct() {
+    this.submitted = true;
+    this.tipouvaService.saveTipouva(this.tipouva).subscribe((data) => {
+      this.tipouva = data;
+      this.loadActulizar();
+    });
+  }
+  loadActulizar() {
+    this.tipouvas.push(this.tipouva);
+    this.tipouvas = [...this.tipouvas];
+    this.productDialog = false;
+    this.tipouva = {};
+  }
 }

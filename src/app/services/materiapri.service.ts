@@ -11,6 +11,7 @@ export class MateriapriService {
   myAppUrl = environment.backmateria;
   myApiUrl = '/list';
   myApicrear = '/materiaprima/create';
+  myApiborrar ='/materiaprima/eliminar'
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Materiapri[]> {
@@ -23,6 +24,6 @@ export class MateriapriService {
     );
   }
   deleteMateria(id: Number) {
-    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    return this.http.delete(`${this.myAppUrl}${this.myApiborrar}/${id}`);
   }
 }

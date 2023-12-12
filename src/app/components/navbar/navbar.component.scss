@@ -1,19 +1,18 @@
-// Definición de variables para tonalidades verdes
-$verde-primario: #4CAF50;  // Puedes cambiar este color a tu preferencia
+
+$verde-primario: #4CAF50;  
 $verde-oscuro: #388E3C;
 
-// Estilos para el componente navbar
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;  // Fondo blanco
+  background-color: white;  
   padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  // Sombra suave
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
 
   .logo {
-    max-width: 100px;  // Ajusta el tamaño máximo de la imagen
-    height: auto;  // Mantiene la proporción al ajustar el ancho
+    max-width: 100px;  
+    height: auto;  
   }
 
   ul {
@@ -27,16 +26,16 @@ nav {
 
       a {
         text-decoration: none;
-        color: $verde-primario;  // Color de texto verde
-        font-weight: bold;  // Texto en negrita
-        padding: 10px 15px;  // Ajusta el relleno del botón
-        border-radius: 5px;  // Bordes redondeados
-        background-color: transparent;  // Fondo transparente
-        transition: background-color 0.3s ease, color 0.3s ease;  // Transiciones suaves
+        color: $verde-primario;  
+        font-weight: bold; 
+        padding: 10px 15px;  
+        border-radius: 5px; 
+        background-color: transparent;  
+        transition: background-color 0.3s ease, color 0.3s ease;  
 
         &:hover {
-          color: white;  // Cambia el color al pasar el ratón
-          background-color: $verde-oscuro;  // Cambia el fondo al pasar el ratón
+          color: white;  
+          background-color: $verde-oscuro;  
         }
       }
     }

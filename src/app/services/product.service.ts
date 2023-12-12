@@ -9,8 +9,13 @@ import { Product } from '../model/Product';
 })
 export class ProductService {
   myAppUrl = environment.backRoot;
+  myAppUrlcat = environment.backtipopro;
   myApiUrl = '/list';
   myApicrear = '/producto/create';
+  myApiborrar = '/producto/eliminar';
+  myApiByid = '/producto';
+  myApiByidcat = '/categoria';
+  productos: Product[] = [];
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
@@ -20,6 +25,14 @@ export class ProductService {
     return this.http.post<Product>(this.myAppUrl + this.myApicrear, product);
   }
   deleteProduct(id: Number) {
-    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    return this.http.delete(`${this.myAppUrl}${this.myApiborrar}/${id}`);
   }
+  getproductibyid(id: number) {
+    return this.http.get<Product>(`${this.myApiUrl}${this.myApiByid}/${id}`);
+  }
+  getproductosporcategoria(id: any) {
+    return this.http.get(`${this.myApiUrl}/${id}`);
+  }
+  
 }
+

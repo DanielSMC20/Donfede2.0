@@ -11,6 +11,7 @@ export class TipouvaService {
   myAppUrl = environment.backtipou;
   myApiUrl = '/list';
   myApicrear = '/create';
+  myApiborrar = '/tipouva/eliminar';
   constructor(private http: HttpClient) {}
   getTipoUva(): Observable<Tipouva[]> {
     return this.http.get<Tipouva[]>(this.myAppUrl + this.myApiUrl);
@@ -19,6 +20,6 @@ export class TipouvaService {
     return this.http.post<Tipouva>(this.myAppUrl + this.myApicrear, tipopro);
   }
   deletetipouva(id: Number) {
-    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    return this.http.delete(`${this.myAppUrl}${this.myApiborrar}/${id}`);
   }
 }

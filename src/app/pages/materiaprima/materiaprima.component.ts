@@ -32,10 +32,10 @@ export class MateriaprimaComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    this.materiaService.deleteMateria(id).subscribe((data) => {
+    this.materiaService.deleteMateria(id).subscribe(data => {
       console.log(data);
     });
-    this.materiapris = this.materiapris.filter((val) => val.id !== id);
+    this.materiapris = this.materiapris.filter(val => val.id !== id);
     this.materiapri = {};
   }
 
