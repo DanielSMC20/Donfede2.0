@@ -11,6 +11,7 @@ export class TipoproductoService {
   myAppUrl = environment.backtipopro;
   myApiUrl = '/list';
   myApicrear = '/create';
+  myApiborrar = '/eliminar';
   constructor(private http: HttpClient) {}
   getTipopro(): Observable<Tipopro[]> {
     return this.http.get<Tipopro[]>(this.myAppUrl + this.myApiUrl);
@@ -19,6 +20,6 @@ export class TipoproductoService {
     return this.http.post<Tipopro>(this.myAppUrl + this.myApicrear, tipopro);
   }
   deletetipo(id: Number) {
-    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    return this.http.delete(`${this.myAppUrl}${this.myApiborrar}/${id}`);
   }
 }

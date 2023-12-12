@@ -2,7 +2,6 @@
   <p-toolbar styleClass="mb-4 gap-2">
       <ng-template pTemplate="left">
           <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-          <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct()"></button>
       </ng-template>      
   </p-toolbar>
   <p-table #dt [value]="ventas" [rows]="10" [paginator]="true" [globalFilterFields]="['descripcion']" [tableStyle]="{'min-width': '75rem'}"
@@ -10,7 +9,7 @@
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
       <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
-              <h1 class="m-0">Gestión de Productos</h1>
+              <h1 class="m-0">Gestión de Ventas</h1>
               <span class="p-input-icon-left">
                   <i class="pi pi-search"></i>
                   <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Search..." />
@@ -49,18 +48,25 @@
   </p-table>
 </div>
 <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Detalle de Productos" [modal]="true" styleClass="p-fluid">
+    <button pButton pRipple label="Buscar por id" icon="pi pi-times" class="p-button-text" (click)="byid()"></button>
   <ng-template pTemplate="content">
       <div class="field">
-          <label for="descripcion">Descripcion</label>
-          <input type="text" pInputText id="name" [(ngModel)]="venta.fechacreacion" required autofocus />
-          <small class="p-error" *ngIf="submitted && !venta.tipoentrega">Descripcion es requerido.</small>
-      </div>
-      <div class="field">
-          <label for="precio">Precio</label>
+        
+        <label for="Usuario">ID USUARIO</label>
+        <p-inputNumber type="number" pInputText id="name" [(ngModel)]="venta.iduser" ></p-inputNumber>
+        <label for="Entrega">Tipo de Entrega</label>
+        <input type="text" pInputText id="name" [(ngModel)]="venta.tipoentrega" required autofocus />
+        <label for="descripcion">Tipo de Pago</label>
+          <input type="text" pInputText id="name" [(ngModel)]="venta.tipodepago" required autofocus />
+          <label for="product.id" >Producto ID</label>
+          <p-inputNumber [(ngModel)]="detalleventa.productoid" ></p-inputNumber>
           <div class="field col">
             <label for="precio">Precio</label>
-            <p-inputNumber id="precio" [(ngModel)]="venta.id" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            <p-inputNumber id="precio" [(ngModel)]="detalleventa.preciounitario" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
         </div>
+        Cantidad
+        <p-inputNumber [(ngModel)]="detalleventa.cantidad" mode="decimal" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical"
+            decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
       </div>
   </ng-template>
   <ng-template pTemplate="footer">
